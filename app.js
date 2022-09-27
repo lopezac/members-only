@@ -3,8 +3,15 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
+const session = require("express-session");
+const passport = require("passport");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
+
+var indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth");
+
 require("dotenv").config();
 
 const mongoDB = process.env.MONGODB_URI;
@@ -14,8 +21,6 @@ mongoose.connect(mongoDB, {
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error"));
-
-var indexRouter = require("./routes/index");
 
 var app = express();
 
@@ -29,7 +34,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    saveUnitialized: true,
+    resave: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use("/", authRouter);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler

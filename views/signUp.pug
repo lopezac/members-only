@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1 Sign Up Form
+  form(action="" method="POST")
+    label(for="firstName") First name
+    input(type="text" id="firstName" name="firstName" minlength="3" maxlength="60"
+      required value=user && user.firstName)
+    
+    label(for="lastName") Last name
+    input(type="text" id="lastName" name="lastName" minlength="3" maxlength="60"
+      required value=user && user.lastName)
+
+    label(for="username") Username
+    input(type="text" id="username" name="username" minlength="5" maxlength="100"
+      required value=user && user.username)
+
+    label(for="password") Password
+    input(type="password" id="password" name="password" minlength="7" required
+      value=user && user.password)
+
+    label(for="confirmPassword") Confirm password
+    input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
+      required value=confirmPassword)
+
+    fieldset
+      legend Membership
+
+      // refactor this into arr = ['true', 'false']; each value in arr; input 
+      input(type="radio" id="membershipTrue" name="membership" value="true"
+        checked=user && user.membership == true)
+      label(for="membershipTrue") True
+
+      input(type="radio" id="membershipFalse" name="membership" value="false"
+        checked=user && user.membership == false)
+      label(for="membershipFalse") False
+
+    button(type="submit") Submit
+  
+  if errors
+    ul
+      each error in errors
+        li= error.msg
