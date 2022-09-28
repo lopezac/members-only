@@ -1,6 +1,6 @@
-const e = require("express");
 const { body, validationResult } = require("express-validator");
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
 
@@ -50,9 +50,16 @@ exports.signUpPost = [
       });
     }
 
-    user.save((err) => {
+    bcrypt.genSalt(10, function (err, salt) {
       if (err) return next(err);
-      res.redirect("/");
+      bcrypt.hash(user.password, salt, function (err, hashedPassword) {
+        if (err) return next(err);
+        user.password = hashedPassword;
+        user.save((err) => {
+          if (err) return next(err);
+          res.redirect("/");
+        });
+      });
     });
   },
 ];
@@ -65,3 +72,10 @@ exports.signInPost = passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/sign-in",
 });
+
+exports.signOutPost = (req, res, next) => {
+  req.logout(function (err) {
+    if (err) next(err);
+    res.redirect("/");
+  });
+};

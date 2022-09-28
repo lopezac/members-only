@@ -23,18 +23,6 @@ block content
     input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
       required value=confirmPassword)
 
-    fieldset
-      legend Membership
-
-      // refactor this into arr = ['true', 'false']; each value in arr; input 
-      input(type="radio" id="membershipTrue" name="membership" value="true"
-        checked=user && user.membership == true)
-      label(for="membershipTrue") True
-
-      input(type="radio" id="membershipFalse" name="membership" value="false"
-        checked=user && user.membership == false)
-      label(for="membershipFalse") False
-
     button(type="submit") Submit
   
   if errors

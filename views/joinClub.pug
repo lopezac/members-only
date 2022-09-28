@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Join the Members Only Club
+  p. 
+    Become the next member of the members only club, and start to receive 
+    exclusive content from our sponsors and networks.
+  p Start to see the authors and timestamp of all posts.
+  p Join us and become part of this unique experience.
+  p Enter the secret password and gain the membership status.
+
+  form(action="join-club" method="POST")
+    label(for="secretCode")
+    input(type="text" id="secretCode" name="secretCode" required
+      value=secretCode)
+
+    button(type="submit") Join
+
+  if errors
+    ul
+      for error in errors
+        li=error.msg

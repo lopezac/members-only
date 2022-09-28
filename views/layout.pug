@@ -4,4 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      nav
+        ul
+          if (currentUser)
+            if (!currentUser.membership)
+              li #[a(href="join-club") Join the Club]
+            form(action="sign-out" method="POST")
+              button(type="submit") Sign Out
+            li= currentUser.username
+            li #[a(href="message/create") Create a new message]
+          else
+            li #[a(href="sign-up") Sign Up]
+            li #[a(href="sign-in") Sign In]
+    main
+      block content
+    footer
+      p Axel C. Lopez @Copyright 2022 
+        a(href="https://github.com/lopezac") GitHub
+          //- img(class="icon" src="/icons/github.png" alt="GitHub")
