@@ -6,9 +6,7 @@ const baseController = require("../controllers/baseController");
 const messageController = require("../controllers/messageController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+router.get("/", baseController.index);
 
 router.get("/join-club", baseController.joinClubGet);
 

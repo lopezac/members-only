@@ -1,8 +1,16 @@
 const { body, validationResult } = require("express-validator");
 
 const User = require("../models/user");
+const Message = require("../models/message");
 
-exports.index = (req, res, next) => {};
+exports.index = (req, res, next) => {
+  Message.find({})
+    .populate("user")
+    .exec((err, messages) => {
+      if (err) return next(err);
+      return res.render("index", { title: "Homepage", messages });
+    });
+};
 
 exports.usersIndex = (req, res, next) => {
   User.find({}).exec((err, users) => {
