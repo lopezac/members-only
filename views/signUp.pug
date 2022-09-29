@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 Sign Up Form
+  h1= title
   form(action="" method="POST")
     label(for="firstName") First name
     input(type="text" id="firstName" name="firstName" minlength="3" maxlength="60"
@@ -16,12 +16,11 @@ block content
       required value=user && user.username)
 
     label(for="password") Password
-    input(type="password" id="password" name="password" minlength="7" required
-      value=user && user.password)
+    input(type="password" id="password" name="password" minlength="7" required)
 
     label(for="confirmPassword") Confirm password
     input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
-      required value=confirmPassword)
+      required)
 
     button(type="submit") Submit
   

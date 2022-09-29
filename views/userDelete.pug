@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Delete #{user.username} account
+  if !currentUser || (currentUser && currentUser._id.toString() !== user._id.toString())
+    p You need to be the account owner to delete the account.
+    
+  else if messages.length
+    p If you wanna delete your account, you need first to delete these messages
+    ul
+      each message in messages
+        li
+          a(href=message.url) #{message.timestampShort} - #{message.title}
+  else
+    p Are you sure you wanna delete your account?. There is no comeback.
+    form(action="" method="POST")
+      button(type="submit") Delete
+
+  if errors
+    ul
+      each error in errors
+        li=error

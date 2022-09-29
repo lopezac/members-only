@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= user.fullName
+  p @#{user.username}
+  p Is membership #{user.membership}
+
+  if currentUser && currentUser._id.toString() === user._id.toString()
+    p
+      a(href=`${user.url}/update`) Update
+    p
+      a(href=`${user.url}/delete`) Delete
+
+  if messages.length
+    h2 Messages
+    section
+      each message in messages
+        article
+          h3
+            a(href=message.url)= message.title
+          p 
+            a(href=user.url) #{user.fullName} @#{user.username}
+          p= message.timestampFormat
+          p= message.text
+  else
+    h2 No messages yet

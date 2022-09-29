@@ -13,4 +13,12 @@ MessageSchema.virtual("timestampFormat").get(function () {
   return format(this.timestamp, "Pp");
 });
 
+MessageSchema.virtual("timestampShort").get(function () {
+  return format(this.timestamp, "P");
+});
+
+MessageSchema.virtual("url").get(function () {
+  return `/message/${this._id}`;
+});
+
 module.exports = mongoose.model("Message", MessageSchema);

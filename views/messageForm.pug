@@ -1,4 +1,22 @@
 extends layout
 
 block content
-  h1 Write a new message
+  h1= title
+  if message && currentUser && currentUser._id.toString() == message.user._id || currentUser 
+    form(action="" method="POST")
+      label(for="title") Title
+      input(type="text" id="title" name="title" minLength="3" maxLength="200"
+        required value=message && message.title)
+
+      label(for="text") Text
+      textarea(id="text" name="text" minLength="10" maxLength="500" required
+        rows="7" cols="60")= message ? message.text : ""
+
+      button(type="submit") Submit
+  else
+    p You must be signed in, and be the message author to update it
+
+  if errors
+    ul
+      each error in errors
+        li= error.msg

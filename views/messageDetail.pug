@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= message.title
+  p 
+    a(href=message.user.url) #{message.user.fullName} @#{message.user.username}
+  p= message.timestampFormat
+  p= message.text
+
+  if currentUser && currentUser._id.toString() == message.user._id
+    p
+      a(href=`${message.url}/update`) Update
+    form(action=`${message.url}/delete` method="POST")
+      button(type="submit") Delete
+    

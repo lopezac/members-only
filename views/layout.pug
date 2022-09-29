@@ -9,14 +9,14 @@ html
         ul
           if (currentUser)
             if (!currentUser.membership)
-              li #[a(href="join-club") Join the Club]
-            form(action="sign-out" method="POST")
+              li #[a(href="/join-club") Join the Club]
+            form(action="/sign-out" method="POST")
               button(type="submit") Sign Out
-            li= currentUser.username
-            li #[a(href="message/create") Create a new message]
+            li #[a(href=currentUser.url)= currentUser.username]
+            li #[a(href="/message/create") Create a new message]
           else
-            li #[a(href="sign-up") Sign Up]
-            li #[a(href="sign-in") Sign In]
+            li #[a(href="/sign-up") Sign Up]
+            li #[a(href="/sign-in") Sign In]
     main
       block content
     footer
