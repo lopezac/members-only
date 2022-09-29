@@ -7,6 +7,7 @@ html
     header
       nav
         ul
+          li #[a(href="/users") Users]
           if (currentUser)
             if (!currentUser.membership)
               li #[a(href="/join-club") Join the Club]

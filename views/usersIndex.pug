@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Users
+
+  if users
+    ul
+      each user in users
+        li
+          p #[a(href=user.url) @#{user.username}]
+          p #[a(href=user.url)= user.fullName]

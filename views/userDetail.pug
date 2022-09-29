@@ -3,7 +3,7 @@ extends layout
 block content
   h1= user.fullName
   p @#{user.username}
-  p Is membership #{user.membership}
+  p Membership status: #[strong #{user.membership}]
 
   if currentUser && currentUser._id.toString() === user._id.toString()
     p

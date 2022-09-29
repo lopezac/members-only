@@ -14,6 +14,8 @@ router.get("/join-club", baseController.joinClubGet);
 
 router.post("/join-club", baseController.joinClubPost);
 
+router.get("/users", baseController.usersIndex);
+
 // Message
 router.get("/message/create", messageController.messageCreateGet);
 

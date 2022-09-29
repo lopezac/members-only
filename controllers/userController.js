@@ -79,7 +79,7 @@ exports.signInPost = passport.authenticate("local", {
 exports.signOutPost = (req, res, next) => {
   req.logout(function (err) {
     if (err) next(err);
-    res.redirect("/");
+    return res.redirect("/");
   });
 };
 
@@ -96,6 +96,8 @@ exports.userDetailGet = (req, res, next) => {
     },
     (err, results) => {
       if (err) return next(err);
+      console.log("user", results.user);
+      if (!results.user) return res.redirect("/"); //remove it boy
       res.render("userDetail", {
         title: results.user.username,
         user: results.user,
@@ -108,7 +110,7 @@ exports.userDetailGet = (req, res, next) => {
 exports.userUpdateGet = (req, res, next) => {
   User.findById(req.params.id).exec((err, user) => {
     if (err) return next(err);
-    res.render("signUp", { title: "Update user", user });
+    return res.render("signUp", { title: "Update user", user });
   });
 };
 
@@ -191,35 +193,9 @@ exports.userDeleteGet = (req, res, next) => {
 };
 
 exports.userDeletePost = (req, res, next) => {
-  async.parallel(
-    {
-      user(callback) {
-        User.findById(req.params.id).exec(callback);
-      },
-      messages(callback) {
-        Message.find({ user: req.params.id }).exec(callback);
-      },
-    },
-    (err, results) => {
-      if (err) return next(err);
-
-      if (req.user && req.user._id.toString() === results.user._id.toString()) {
-      }
-
-      if (results.messages.length) {
-        res.render("userDelete", {
-          title: "Delete user",
-          messages: results.messages,
-          user: results.user,
-          errors: [{ msg: "You need to delete all your posts." }],
-        });
-      }
-
-      res.render("userDelete", {
-        title: "Delete user",
-        messages: results.messages,
-        user: results.user,
-      });
-    }
-  );
+  res.clearCookie("connect.sid");
+  User.findByIdAndDelete(req.params.id, function (err) {
+    if (err) return next(err);
+    return res.redirect("/"); // /user/req.params.id
+  });
 };

@@ -2,6 +2,15 @@ const { body, validationResult } = require("express-validator");
 
 const User = require("../models/user");
 
+exports.index = (req, res, next) => {};
+
+exports.usersIndex = (req, res, next) => {
+  User.find({}).exec((err, users) => {
+    if (err) return next(err);
+    return res.render("usersIndex", { title: "Users", users });
+  });
+};
+
 exports.joinClubGet = (req, res, next) => {
   res.render("joinClub", { title: "Join the Club" });
 };
