@@ -8,7 +8,8 @@ exports.index = (req, res, next) => {
     .populate("user")
     .exec((err, messages) => {
       if (err) return next(err);
-      return res.render("index", { title: "Homepage", messages });
+      console.log("messages", messages);
+      return res.render("index", { title: "Members Only", messages });
     });
 };
 

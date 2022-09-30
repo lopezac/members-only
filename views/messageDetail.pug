@@ -1,15 +1,24 @@
-extends layout
+extends layouts/layout
 
 block content
-  h1= message.title
-  p 
-    a(href=message.user.url) #{message.user.fullName} @#{message.user.username}
-  p= message.timestampFormat
-  p= message.text
+  article
+  - const isUserMsg = () => currentUser && msg.user._id.toString() == currentUser._id.toString();
+  - const isMember = () => currentUser && currentUser.membership;
+  - const isAdmin = () => currentUser && currentUser.isAdmin;
+    h1
+      a(href=msg.url)= msg.title
+    if isUserMsg() || isMember() || isAdmin()
+      p 
+        a(href=msg.user.url) #{msg.user.fullName} @#{msg.user.username}
+      p= msg.timestampFormat
+    else
+      p Private author
+      p Private timestamp
+    p= msg.text
 
-  if currentUser && currentUser._id.toString() == message.user._id
+  if isUserMsg() || isAdmin()
     p
-      a(href=`${message.url}/update`) Update
-    form(action=`${message.url}/delete` method="POST")
+      a(href=`${msg.url}/update`) Update
+    form(action=`${msg.url}/delete` method="POST")
       button(type="submit") Delete
     

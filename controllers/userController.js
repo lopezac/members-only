@@ -32,6 +32,7 @@ exports.signUpPost = [
     return true;
   }),
   body("membership", "Must select a membership status").toBoolean(),
+  body("isAdmin", "Must select if you are an admin").toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -41,6 +42,7 @@ exports.signUpPost = [
       username: req.body.username,
       password: req.body.password,
       membership: req.body.membership,
+      isAdmin: req.body.isAdmin,
     });
 
     if (!errors.isEmpty()) {
@@ -91,7 +93,7 @@ exports.userDetailGet = (req, res, next) => {
         User.findById(req.params.id).exec(callback);
       },
       messages(callback) {
-        Message.find({ user: req.params.id }).exec(callback);
+        Message.find({ user: req.params.id }).populate("user").exec(callback);
       },
     },
     (err, results) => {
@@ -135,6 +137,7 @@ exports.userUpdatePost = [
     return true;
   }),
   body("membership", "Must select a membership status").toBoolean(),
+  body("isAdmin", "Must select if you are an admin").toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -144,8 +147,11 @@ exports.userUpdatePost = [
       username: req.body.username,
       password: req.body.password,
       membership: req.body.membership,
+      isAdmin: req.body.isAdmin ? true : false,
       _id: req.params.id,
     });
+
+    console.log("user after cerate", user);
 
     if (!errors.isEmpty()) {
       console.log(req.body.membership);

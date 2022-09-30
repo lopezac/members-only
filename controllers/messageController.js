@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 const Message = require("../models/message");
 
 exports.messageCreateGet = (req, res, next) => {
-  res.render("messageForm", { title: "Write message" });
+  res.render("msgFormCreate", { title: "Write message" });
 };
 
 exports.messageCreatePost = [
@@ -19,7 +19,7 @@ exports.messageCreatePost = [
     const errors = validationResult(req);
 
     if (!req.user) {
-      return res.render("messageForm", {
+      return res.render("msgFormCreate", {
         title: "Write message",
         errors: [{ msg: "You must be signed in to create a message" }],
       });
@@ -35,7 +35,7 @@ exports.messageCreatePost = [
       res.render("messageForm", {
         title: "Write message",
         errors: errors.array(),
-        message,
+        msg: message,
       });
     }
 
@@ -52,7 +52,10 @@ exports.messageDetailGet = (req, res, next) => {
     .exec((err, message) => {
       if (err) return next(err);
       if (message) {
-        return res.render("messageDetail", { title: message.title, message });
+        return res.render("messageDetail", {
+          title: message.title,
+          msg: message,
+        });
       }
       return next(err);
     });
@@ -64,7 +67,10 @@ exports.messageUpdateGet = (req, res, next) => {
     .exec((err, message) => {
       if (err) return next(err);
       if (message) {
-        return res.render("messageForm", { title: "Update message", message });
+        return res.render("msgFormUpdate", {
+          title: "Update message",
+          msg: message,
+        });
       }
       return next(err);
     });
@@ -101,10 +107,10 @@ exports.messageUpdatePost = [
     });
 
     if (!errors.isEmpty()) {
-      res.render("messageForm", {
+      res.render("msgFormUpdate", {
         title: "Write message",
         errors: errors.array(),
-        message,
+        msg: message,
       });
     }
 

@@ -1,26 +1,20 @@
-extends layout
+extends layouts/msgLayout
 
-block content
-  h1= user.fullName
-  p @#{user.username}
-  p Membership status: #[strong #{user.membership}]
+block main
+  - const isUserProfile = () => currentUser && currentUser._id.toString() === user._id.toString();
+  - const isMember = () => currentUser && currentUser.membership;
+  - const isAdmin = () => currentUser && currentUser.isAdmin;
 
-  if currentUser && currentUser._id.toString() === user._id.toString()
+  if isMember() || isAdmin() || isUserProfile()
+    h1 #[a(href=user.url)= user.fullName]
+    p #[a(href=user.url) @#{user.username}]
+    p Membership status: #[strong #{user.membership}]
+  else
+    h1 Unknown name
+    p @unknown
+
+  if isUserProfile() || isAdmin()
     p
       a(href=`${user.url}/update`) Update
     p
       a(href=`${user.url}/delete`) Delete
-
-  if messages.length
-    h2 Messages
-    section
-      each message in messages
-        article
-          h3
-            a(href=message.url)= message.title
-          p 
-            a(href=user.url) #{user.fullName} @#{user.username}
-          p= message.timestampFormat
-          p= message.text
-  else
-    h2 No messages yet

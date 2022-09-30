@@ -1,4 +1,4 @@
-extends layout
+extends layouts/layout
 
 block content
   h1= title
@@ -21,6 +21,9 @@ block content
     label(for="confirmPassword") Confirm password
     input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
       required)
+
+    label(for="isAdmin") Admin
+    input(type="checkbox" id="isAdmin" name="isAdmin" checked=user.isAdmin ? "true" : "false")
 
     button(type="submit") Submit
   

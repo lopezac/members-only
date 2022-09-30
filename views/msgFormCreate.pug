@@ -1,0 +1,22 @@
+extends layouts/layout
+
+block content
+  h1= title
+  if currentUser 
+    form(action="" method="POST")
+      label(for="title") Title
+      input(type="text" id="title" name="title" minLength="3" maxLength="200"
+        required value=msg && msg.title)
+
+      label(for="text") Text
+      textarea(id="text" name="text" minLength="10" maxLength="500" required
+        rows="7" cols="60")= msg ? msg.text : ""
+
+      button(type="submit") Submit
+  else
+    p You must be signed in to create a message.
+
+  if errors
+    ul
+      each error in errors
+        li= error.msg
