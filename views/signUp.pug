@@ -23,7 +23,7 @@ block content
       required)
 
     label(for="isAdmin") Admin
-    input(type="checkbox" id="isAdmin" name="isAdmin" checked=user.isAdmin ? "true" : "false")
+    input(type="checkbox" id="isAdmin" name="isAdmin" checked=user && user.isAdmin ? "true" : "false")
 
     button(type="submit") Submit
   
