@@ -6,7 +6,7 @@
   gap: 20px;
 }
 
-.messages .message {
+.message {
   border-radius: 5px;
   border: 1px solid $white;
   padding: 10px;
@@ -16,7 +16,8 @@
   }
 }
 
-.message li {
+.message li,
+.users-list li {
   color: $lightWhite;
   font-size: 0.9rem;
 
@@ -26,11 +27,12 @@
   }
 }
 
-.message .msg-detail {
+.msg-detail {
   @extend %flex;
   column-gap: 20px;
+  list-style-type: disc;
 
-  li:nth-child(2) {
-    list-style-type: disc;
+  li:nth-child(1) {
+    list-style-type: none;
   }
 }

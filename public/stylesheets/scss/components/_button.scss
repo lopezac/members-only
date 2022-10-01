@@ -1,4 +1,5 @@
 @use "../base/variables" as *;
+@use "../components/container";
 
 %button {
   border: none;
@@ -10,6 +11,19 @@
   &:hover,
   &:focus {
     background-color: $darkBlue;
+    cursor: pointer;
+  }
+}
+
+%button-delete {
+  @extend %button;
+  background-color: $pink;
+  color: $white;
+  padding: 10px 12px;
+
+  &:hover,
+  &:focus {
+    background-color: $darkPink;
   }
 }
 
@@ -20,13 +34,15 @@ button.btn-sign {
 
 a.btn-delete,
 button.btn-delete {
-  @extend %button;
-  background-color: $pink;
-  color: $white;
-  padding: 10px 12px;
+  @extend %button-delete;
+}
 
-  &:hover,
-  &:focus {
-    background-color: $darkPink;
-  }
+a.btn-send,
+button.btn-send {
+  @extend %button-delete;
+  font-size: 1.3rem;
+}
+
+.buttons {
+  @extend %row-align-center;
 }

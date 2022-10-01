@@ -1,5 +1,6 @@
 %flex {
   display: flex;
+  gap: 10px;
 }
 
 %flex-column {
@@ -15,4 +16,14 @@
 %row-align-center {
   @extend %flex;
   align-items: center;
+}
+
+%column-align-center {
+  @extend %flex-column;
+  align-items: center;
+}
+
+%row-center {
+  @extend %row-justify-center;
+  @extend %row-align-center;
 }

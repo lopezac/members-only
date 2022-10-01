@@ -2,30 +2,36 @@ extends layouts/layout
 
 block content
   h1= title
-  form(action="" method="POST")
-    label(for="firstName") First name
-    input(type="text" id="firstName" name="firstName" minlength="3" maxlength="60"
-      required value=user && user.firstName)
+  form(action="" method="POST" class="fill-form")
+    div(class="form-row")
+      label(for="firstName") First name
+      input(type="text" id="firstName" name="firstName" minlength="3" maxlength="60"
+        required value=user && user.firstName)
     
-    label(for="lastName") Last name
-    input(type="text" id="lastName" name="lastName" minlength="3" maxlength="60"
-      required value=user && user.lastName)
+    div(class="form-row")
+      label(for="lastName") Last name
+      input(type="text" id="lastName" name="lastName" minlength="3" maxlength="60"
+        required value=user && user.lastName)
 
-    label(for="username") Username
-    input(type="text" id="username" name="username" minlength="5" maxlength="100"
-      required value=user && user.username)
+    div(class="form-row")
+      label(for="username") Username
+      input(type="text" id="username" name="username" minlength="5" maxlength="100"
+        required value=user && user.username)
 
-    label(for="password") Password
-    input(type="password" id="password" name="password" minlength="7" required)
+    div(class="form-row")
+      label(for="password") Password
+      input(type="password" id="password" name="password" minlength="7" required)
 
-    label(for="confirmPassword") Confirm password
-    input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
-      required)
+    div(class="form-row")
+      label(for="confirmPassword") Confirm password
+      input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
+        required)
 
-    label(for="isAdmin") Admin
-    input(type="checkbox" id="isAdmin" name="isAdmin" checked=user && user.isAdmin ? "true" : "false")
+    div(class="form-row-checkbox")
+      label(for="isAdmin") Admin
+      input(type="checkbox" id="isAdmin" name="isAdmin" checked=user && user.isAdmin ? "true" : "false")
 
-    button(type="submit") Submit
+    button(type="submit" class="btn-send") Submit
   
   if errors
     ul

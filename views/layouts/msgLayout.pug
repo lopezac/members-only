@@ -4,7 +4,7 @@ block content
   block main
   block messages
     if messages.length
-      h2 Messages
+      h2(class="center-title") Messages
       section(class="messages")
         each msg in messages
           - const isMember = () => currentUser && currentUser.membership;
@@ -16,7 +16,9 @@ block content
             ul(class="msg-detail")
               if isUserMsg() || isMember() || isAdmin()
                 li
-                  a(href=msg.user.url) #{msg.user.fullName} @#{msg.user.username}
+                  a(href=msg.user.url) #{msg.user.fullName}
+                li
+                  a(href=msg.user.url) @#{msg.user.username}
                 li= msg.timestampFormat
               else
                 li Private author

@@ -6,6 +6,7 @@ body > footer {
 }
 
 body > footer p {
-  @extend %row-justify-center;
+  @extend %row-center;
   column-gap: 10px;
+  margin: 6px 0;
 }

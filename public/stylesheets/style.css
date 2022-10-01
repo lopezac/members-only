@@ -1,9 +1,10 @@
-.person-info, .buttons, .message .msg-detail, ul, .person-detail, .topHeader nav,
-.topHeader nav ul, body > footer p, .messages, form.fill-form, body {
+.msg-detail, ul, .person-detail, .person-info, form .form-row-checkbox, .buttons, .topHeader nav,
+.topHeader nav ul, body > footer p, .users-list, .messages, form.fill-form, form .form-row, body {
   display: flex;
+  gap: 10px;
 }
 
-.messages, form.fill-form, body {
+.users-list, .messages, form.fill-form, form .form-row, body {
   flex-direction: column;
 }
 
@@ -11,8 +12,8 @@ body > footer p {
   justify-content: center;
 }
 
-.person-detail, .topHeader nav,
-.topHeader nav ul {
+.person-detail, .person-info, form .form-row-checkbox, .buttons, .topHeader nav,
+.topHeader nav ul, body > footer p {
   align-items: center;
 }
 
@@ -32,6 +33,7 @@ body > footer p {
   background-color: #973e4a;
   padding: 15px 10px;
   font-size: 1.1rem;
+  border-bottom: 1px solid #fafafa;
 }
 .topHeader a {
   padding: 5px;
@@ -51,9 +53,12 @@ body > main {
 
 body > main > .container {
   padding: 20px 15px;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   height: 100%;
+  background-color: #27272a;
+  border-right: 1px solid #fafafa;
+  border-left: 1px solid #fafafa;
 }
 
 h1 {
@@ -66,35 +71,48 @@ body > footer {
 
 body > footer p {
   column-gap: 10px;
+  margin: 6px 0;
 }
 
-a.btn-delete,
-button.btn-delete, a.btn-sign,
-button.btn-sign {
+a.btn-sign,
+button.btn-sign, a.btn-send,
+button.btn-send, a.btn-delete,
+button.btn-delete {
   border: none;
   background-color: #a4dffa;
   color: #18181b;
   border-radius: 5px;
   padding: 5px 10px;
 }
-a.btn-delete:hover,
-button.btn-delete:hover, a.btn-sign:hover,
-button.btn-sign:hover, a.btn-delete:focus,
-button.btn-delete:focus, a.btn-sign:focus,
-button.btn-sign:focus {
+a.btn-sign:hover,
+button.btn-sign:hover, a.btn-send:hover,
+button.btn-send:hover, a.btn-delete:hover,
+button.btn-delete:hover, a.btn-sign:focus,
+button.btn-sign:focus, a.btn-send:focus,
+button.btn-send:focus, a.btn-delete:focus,
+button.btn-delete:focus {
   background-color: #85b5cc;
+  cursor: pointer;
 }
 
-a.btn-delete,
+a.btn-send,
+button.btn-send, a.btn-delete,
 button.btn-delete {
   background-color: #973e4a;
   color: #fafafa;
   padding: 10px 12px;
 }
-a.btn-delete:hover, a.btn-delete:focus,
-button.btn-delete:hover,
+a.btn-send:hover,
+button.btn-send:hover, a.btn-delete:hover,
+button.btn-delete:hover, a.btn-send:focus,
+button.btn-send:focus, a.btn-delete:focus,
 button.btn-delete:focus {
   background-color: #77323c;
+}
+
+a.btn-send,
+button.btn-send {
+  font-size: 1.3rem;
 }
 
 .icon {
@@ -102,16 +120,25 @@ button.btn-delete:focus {
   height: 64px;
 }
 
+.icon-small {
+  width: 32px;
+  height: 32px;
+}
+
 body {
   height: 100vh;
   color: #fafafa;
   background-color: #18181b;
   font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+  gap: 0;
 }
 
 h1,
 h2 {
   font-family: "NotoSerif-Regular", "Roboto-Regular", Arial, Helvetica, sans-serif;
+}
+
+.center-title {
   text-align: center;
 }
 
@@ -137,32 +164,58 @@ p {
   font-size: 1rem;
 }
 
+form.fill-form {
+  gap: 20px;
+}
+
+form .form-row {
+  gap: 2px;
+}
+form .form-row label {
+  color: #d4d4d8;
+  font-size: 0.9rem;
+}
+form .form-row input,
+form .form-row textarea {
+  padding: 6px;
+  color: #18181b;
+}
+
+form .form-row-checkbox input {
+  width: 24px;
+  height: 24px;
+}
+
 .messages {
   gap: 20px;
 }
 
-.messages .message {
+.message {
   border-radius: 5px;
   border: 1px solid #fafafa;
   padding: 10px;
 }
-.messages .message p {
+.message p {
   color: #f4f4f5;
 }
 
-.message li {
+.message li,
+.users-list li {
   color: #d4d4d8;
   font-size: 0.9rem;
 }
-.message li a:hover, .message li a:focus {
+.message li a:hover, .message li a:focus,
+.users-list li a:hover,
+.users-list li a:focus {
   text-decoration: underline;
 }
 
-.message .msg-detail {
+.msg-detail {
   column-gap: 20px;
-}
-.message .msg-detail li:nth-child(2) {
   list-style-type: disc;
+}
+.msg-detail li:nth-child(1) {
+  list-style-type: none;
 }
 
 .person-detail {
@@ -171,10 +224,6 @@ p {
 
 .detail h1 {
   text-align: start;
-}
-
-.buttons {
-  gap: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

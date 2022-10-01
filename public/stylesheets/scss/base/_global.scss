@@ -9,12 +9,16 @@ body {
   color: $white;
   background-color: $black;
   font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+  gap: 0;
 }
 
 h1,
 h2 {
   font-family: "NotoSerif-Regular", "Roboto-Regular", Arial, Helvetica,
     sans-serif;
+}
+
+.center-title {
   text-align: center;
 }
 

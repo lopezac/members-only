@@ -3,15 +3,17 @@ extends layouts/layout
 block content
   h1= title
   form(action="/sign-in" method="POST" class="fill-form")
-    label(for="username") Username
-    input(type="text" id="username" name="username" minlength="5" maxlength="100"
-      required value=user && user.username)
+    div(class="form-row")
+      label(for="username") Username
+      input(type="text" id="username" name="username" minlength="5" maxlength="100"
+        required value=user && user.username)
 
-    label(for="password") Password
-    input(type="password" id="password" name="password" minlength="7" required
-      value=user && user.password)
+    div(class="form-row")
+      label(for="password") Password
+      input(type="password" id="password" name="password" minlength="7" required
+        value=user && user.password)
 
-    button(type="submit") Submit
+    button(type="submit" class="btn-send") Submit
 
   if errors
     ul

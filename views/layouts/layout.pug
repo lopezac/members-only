@@ -12,7 +12,7 @@ html
           li #[a(href="/users") Users]
         ul(class="right-ul")
           if (currentUser)
-            li #[a(href="/message/create") Create a new message]
+            li #[a(href="/message/create") Write message]
             if (!currentUser.membership)
               li #[a(href="/join-club") Join the Club]
             li
@@ -27,5 +27,5 @@ html
         block content
     footer
       p Axel C. Lopez @Copyright 2022 
-        a(href="https://github.com/lopezac") GitHub
-          //- img(class="icon" src="/icons/github.png" alt="GitHub")
+        a(href="https://github.com/lopezac")
+          img(class="icon-small" src="/icons/github.png" alt="GitHub")

@@ -1,24 +1,27 @@
 extends layouts/layout
 
 block content
-  article
-  - const isUserMsg = () => currentUser && msg.user._id.toString() == currentUser._id.toString();
-  - const isMember = () => currentUser && currentUser.membership;
-  - const isAdmin = () => currentUser && currentUser.isAdmin;
+  -const isUserMsg = () => currentUser && msg.user._id.toString() == currentUser._id.toString();
+  -const isMember = () => currentUser && currentUser.membership;
+  -const isAdmin = () => currentUser && currentUser.isAdmin;
+  article(class="message")
     h1
       a(href=msg.url)= msg.title
-    if isUserMsg() || isMember() || isAdmin()
-      p 
-        a(href=msg.user.url) #{msg.user.fullName} @#{msg.user.username}
-      p= msg.timestampFormat
-    else
-      p Private author
-      p Private timestamp
+    ul(class="msg-detail")
+      if isUserMsg() || isMember() || isAdmin()
+        li
+          a(href=msg.user.url) #{msg.user.fullName}
+        li
+          a(href=msg.user.url) @#{msg.user.username}
+        li= msg.timestampFormat
+      else
+        li Private author
+        li Private timestamp
     p= msg.text
 
-  if isUserMsg() || isAdmin()
-    p
-      a(href=`${msg.url}/update`) Update
-    form(action=`${msg.url}/delete` method="POST")
-      button(type="submit") Delete
-    
+    if isUserMsg() || isAdmin()
+      div(class="buttons")
+        p
+          a(href=`${msg.url}/update` class="btn-delete") Update
+        form(action=`${msg.url}/delete` method="POST")
+          button(type="submit" class="btn-delete") Delete

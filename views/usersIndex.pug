@@ -1,11 +1,19 @@
 extends layouts/layout
 
 block content
+  -const isMember = () => currentUser && currentUser.membership;
+  -const isAdmin = () => currentUser && currentUser.isAdmin;
+
   h1 Users
 
-  if users
-    ul
-      each user in users
-        li
-          p #[a(href=user.url) @#{user.username}]
-          p #[a(href=user.url)= user.fullName]
+  if isMember() || isAdmin()
+    if users
+      div(class="users-list")
+        each user in users
+          ul(class="msg-detail")
+            li #[a(href=user.url) @#{user.username}]
+            li #[a(href=user.url)= user.fullName]
+    else
+      p It seems there are no users.
+  else
+    p You must be a member to see all users.

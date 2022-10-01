@@ -1,5 +1,33 @@
 @use "../components/container";
+@use "../base/variables" as *;
 
 form.fill-form {
   @extend %flex-column;
+  gap: 20px;
+  // max-width: 600px;
+}
+
+form .form-row {
+  @extend %flex-column;
+  gap: 2px;
+
+  label {
+    color: $lightWhite;
+    font-size: 0.9rem;
+  }
+
+  input,
+  textarea {
+    padding: 6px;
+    color: $black;
+  }
+}
+
+form .form-row-checkbox {
+  @extend %row-align-center;
+
+  input {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -9,12 +9,13 @@ block content
   p Join us and become part of this unique experience.
   p Enter the secret password and gain the membership status.
 
-  form(action="/join-club" method="POST")
-    label(for="secretCode")
-    input(type="text" id="secretCode" name="secretCode" required
-      value=secretCode)
+  form(action="/join-club" method="POST" class="fill-form")
+    div(class="form-row")
+      label(for="secretCode") Secret code
+      input(type="text" id="secretCode" name="secretCode" required
+        value=secretCode)
 
-    button(type="submit") Join
+    button(type="submit" class="btn-send") Join
 
   if errors
     ul

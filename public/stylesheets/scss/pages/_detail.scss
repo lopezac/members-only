@@ -6,14 +6,9 @@
 }
 
 .person-info {
-  @extend %flex;
+  @extend %row-align-center;
 }
 
 .detail h1 {
   text-align: start;
-}
-
-.buttons {
-  @extend %flex;
-  gap: 10px;
 }

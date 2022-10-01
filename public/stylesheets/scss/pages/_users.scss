@@ -1,0 +1,5 @@
+@use "../components/container";
+
+.users-list {
+  @extend %flex-column;
+}
