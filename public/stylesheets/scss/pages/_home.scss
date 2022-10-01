@@ -1,0 +1,36 @@
+@use "../base/variables" as *;
+@use "../components/container";
+
+.messages {
+  @extend %flex-column;
+  gap: 20px;
+}
+
+.messages .message {
+  border-radius: 5px;
+  border: 1px solid $white;
+  padding: 10px;
+
+  p {
+    color: #f4f4f5;
+  }
+}
+
+.message li {
+  color: $lightWhite;
+  font-size: 0.9rem;
+
+  & a:hover,
+  & a:focus {
+    text-decoration: underline;
+  }
+}
+
+.message .msg-detail {
+  @extend %flex;
+  column-gap: 20px;
+
+  li:nth-child(2) {
+    list-style-type: disc;
+  }
+}

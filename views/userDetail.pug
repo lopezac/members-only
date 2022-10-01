@@ -4,17 +4,24 @@ block main
   - const isUserProfile = () => currentUser && currentUser._id.toString() === user._id.toString();
   - const isMember = () => currentUser && currentUser.membership;
   - const isAdmin = () => currentUser && currentUser.isAdmin;
+  - const isUserMember = () => user.membership;
 
-  if isMember() || isAdmin() || isUserProfile()
-    h1 #[a(href=user.url)= user.fullName]
-    p #[a(href=user.url) @#{user.username}]
-    p Membership status: #[strong #{user.membership}]
-  else
-    h1 Unknown name
-    p @unknown
+  h1= user.fullName
+  div(class="person-detail")
+    div(class="person-info")
+      if isMember() || isAdmin() || isUserProfile()
+        p @#{user.username}
+        if isUserMember()
+          img(class="icon" src="/icons/star.png" alt="vip star")
+        else
+          img(class="icon" src="/icons/free.png" alt="free badge")
+      else
+        h1 Unknown name
+        p @unknown
 
-  if isUserProfile() || isAdmin()
-    p
-      a(href=`${user.url}/update`) Update
-    p
-      a(href=`${user.url}/delete`) Delete
+    if isUserProfile() || isAdmin()
+      div(class="buttons")
+        p
+          a(href=`${user.url}/update` class="btn-delete") Update
+        p
+          a(href=`${user.url}/delete` class="btn-delete") Delete

@@ -5,23 +5,26 @@ html
     link(rel='stylesheet', href='/stylesheets/modern-normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    header
+    header(class="topHeader")
       nav
         ul
           li #[a(href="/") Home]
           li #[a(href="/users") Users]
+        ul(class="right-ul")
           if (currentUser)
+            li #[a(href="/message/create") Create a new message]
             if (!currentUser.membership)
               li #[a(href="/join-club") Join the Club]
-            form(action="/sign-out" method="POST")
-              button(type="submit") Sign Out
+            li
+              form(action="/sign-out" method="POST")
+                button(type="submit" class="btn-sign") Sign Out
             li #[a(href=currentUser.url)= currentUser.username]
-            li #[a(href="/message/create") Create a new message]
           else
-            li #[a(href="/sign-up") Sign Up]
-            li #[a(href="/sign-in") Sign In]
+            li #[a(href="/sign-up" class="btn-sign") Sign Up]
+            li #[a(href="/sign-in" class="btn-sign") Sign In]
     main
-      block content
+      div(class="container")
+        block content
     footer
       p Axel C. Lopez @Copyright 2022 
         a(href="https://github.com/lopezac") GitHub

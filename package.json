@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "devStart": "nodemon ./bin/www",
-    "serverStart": "DEBUG=members-only:* npm run devStart"
+    "compileSass": "sass --watch ./public/stylesheets/scss/main.scss ./public/stylesheets/style.css",
+    "serverStart": "DEBUG=members-only:* npm run devStart & npm run compileSass"
   },
   "dependencies": {
     "async": "^3.2.4",

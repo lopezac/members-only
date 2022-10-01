@@ -2,7 +2,7 @@ extends layouts/layout
 
 block content
   h1= title
-  form(action="/sign-in" method="POST")
+  form(action="/sign-in" method="POST" class="fill-form")
     label(for="username") Username
     input(type="text" id="username" name="username" minlength="5" maxlength="100"
       required value=user && user.username)

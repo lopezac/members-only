@@ -1,0 +1,19 @@
+@use "../components/container";
+
+.person-detail {
+  @extend %row-align-center;
+  justify-content: space-between;
+}
+
+.person-info {
+  @extend %flex;
+}
+
+.detail h1 {
+  text-align: start;
+}
+
+.buttons {
+  @extend %flex;
+  gap: 10px;
+}

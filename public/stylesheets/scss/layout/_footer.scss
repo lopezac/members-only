@@ -1,0 +1,11 @@
+@use "../components/container";
+@use "../base/variables" as *;
+
+body > footer {
+  border-top: 1px solid $white;
+}
+
+body > footer p {
+  @extend %row-justify-center;
+  column-gap: 10px;
+}

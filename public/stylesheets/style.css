@@ -1,8 +1,180 @@
+.person-info, .buttons, .message .msg-detail, ul, .person-detail, .topHeader nav,
+.topHeader nav ul, body > footer p, .messages, form.fill-form, body {
+  display: flex;
+}
+
+.messages, form.fill-form, body {
+  flex-direction: column;
+}
+
+body > footer p {
+  justify-content: center;
+}
+
+.person-detail, .topHeader nav,
+.topHeader nav ul {
+  align-items: center;
+}
+
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("../../../fonts/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "NotoSerif-Regular";
+  src: url("../../../fonts/NotoSerif-Regular.ttf");
+}
+@font-face {
+  font-family: "NotoSerif-Bold";
+  src: url("../../../fonts/NotoSerif-Bold.ttf");
+}
+.topHeader {
+  background-color: #973e4a;
+  padding: 15px 10px;
+  font-size: 1.1rem;
+}
+.topHeader a {
+  padding: 5px;
+  border-radius: 5px;
+}
+.topHeader a:hover, .topHeader a:focus {
+  background-color: #77323c;
+}
+
+.topHeader nav .right-ul {
+  margin-left: auto;
+}
+
+body > main {
+  flex: 1;
+}
+
+body > main > .container {
+  padding: 20px 15px;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+body > footer {
+  border-top: 1px solid #fafafa;
+}
+
+body > footer p {
+  column-gap: 10px;
+}
+
+a.btn-delete,
+button.btn-delete, a.btn-sign,
+button.btn-sign {
+  border: none;
+  background-color: #a4dffa;
+  color: #18181b;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+a.btn-delete:hover,
+button.btn-delete:hover, a.btn-sign:hover,
+button.btn-sign:hover, a.btn-delete:focus,
+button.btn-delete:focus, a.btn-sign:focus,
+button.btn-sign:focus {
+  background-color: #85b5cc;
+}
+
+a.btn-delete,
+button.btn-delete {
+  background-color: #973e4a;
+  color: #fafafa;
+  padding: 10px 12px;
+}
+a.btn-delete:hover, a.btn-delete:focus,
+button.btn-delete:hover,
+button.btn-delete:focus {
+  background-color: #77323c;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  color: #fafafa;
+  background-color: #18181b;
+  font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "NotoSerif-Regular", "Roboto-Regular", Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+h3 {
+  font-family: "NotoSerif-Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  margin: 0 0 5px 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  column-gap: 20px;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  color: inherit;
 }
+
+p {
+  font-size: 1rem;
+}
+
+.messages {
+  gap: 20px;
+}
+
+.messages .message {
+  border-radius: 5px;
+  border: 1px solid #fafafa;
+  padding: 10px;
+}
+.messages .message p {
+  color: #f4f4f5;
+}
+
+.message li {
+  color: #d4d4d8;
+  font-size: 0.9rem;
+}
+.message li a:hover, .message li a:focus {
+  text-decoration: underline;
+}
+
+.message .msg-detail {
+  column-gap: 20px;
+}
+.message .msg-detail li:nth-child(2) {
+  list-style-type: disc;
+}
+
+.person-detail {
+  justify-content: space-between;
+}
+
+.detail h1 {
+  text-align: start;
+}
+
+.buttons {
+  gap: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */

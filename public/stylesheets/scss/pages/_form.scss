@@ -1,0 +1,5 @@
+@use "../components/container";
+
+form.fill-form {
+  @extend %flex-column;
+}

@@ -1,0 +1,42 @@
+@use "./variables" as *;
+@use "../components/container";
+@use "../components/button";
+@use "../components/icon";
+
+body {
+  @extend %flex-column;
+  height: 100vh;
+  color: $white;
+  background-color: $black;
+  font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "NotoSerif-Regular", "Roboto-Regular", Arial, Helvetica,
+    sans-serif;
+  text-align: center;
+}
+
+h3 {
+  font-family: "NotoSerif-Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  margin: 0 0 5px 0;
+}
+
+ul {
+  @extend %flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  column-gap: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  font-size: 1rem;
+}

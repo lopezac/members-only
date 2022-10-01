@@ -1,0 +1,26 @@
+@use "../components/container";
+@use "../base/variables" as *;
+
+.topHeader {
+  background-color: $pink;
+  padding: 15px 10px;
+  font-size: 1.1rem;
+
+  a {
+    &:hover,
+    &:focus {
+      background-color: $darkPink;
+    }
+    padding: 5px;
+    border-radius: 5px;
+  }
+}
+
+.topHeader nav,
+.topHeader nav ul {
+  @extend %row-align-center;
+}
+
+.topHeader nav .right-ul {
+  margin-left: auto;
+}
