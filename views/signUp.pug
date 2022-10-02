@@ -33,7 +33,7 @@ block content
 
     div(class="form-row-checkbox")
       label(for="isAdmin") Admin
-      input(type="checkbox" id="isAdmin" name="isAdmin" checked=user.isAdmin ? true : false)
+      input(type="checkbox" id="isAdmin" name="isAdmin" checked=user && user.isAdmin ? true : false)
 
     button(type="submit" class="btn-send") Submit
   

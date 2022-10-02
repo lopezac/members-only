@@ -71,7 +71,10 @@ exports.signUpPost = [
         user.password = hashedPassword;
         user.save((err) => {
           if (err) return next(err);
-          res.redirect("/");
+          req.login(user, function (err) {
+            if (err) return next(err);
+            return res.redirect("/");
+          });
         });
       });
     });

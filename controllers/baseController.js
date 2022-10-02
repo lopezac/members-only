@@ -6,6 +6,7 @@ const Message = require("../models/message");
 exports.index = (req, res, next) => {
   Message.find({})
     .populate("user")
+    .sort({ timestamp: -1 })
     .exec((err, messages) => {
       if (err) return next(err);
       console.log("messages", messages);
