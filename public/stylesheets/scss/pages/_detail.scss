@@ -7,6 +7,11 @@
 
 .person-info {
   @extend %row-align-center;
+
+  h1,
+  p {
+    margin: 0;
+  }
 }
 
 .detail h1 {

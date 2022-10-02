@@ -1,8 +1,10 @@
 extends layouts/layout
 
 block content
+  -const isUserMsg = () => currentUser && msg.user._id.toString() == currentUser._id.toString();
+  -const isAdmin = () => currentUser && currentUser.isAdmin;
   h1= title
-  if msg && currentUser && currentUser._id.toString() == msg.user._id.toString()
+  if isUserMsg() || isAdmin()
     form(action="" method="POST" class="fill-form")
       div(class="form-row")
         label(for="title") Title
@@ -11,7 +13,7 @@ block content
 
       div(class="form-row")
         label(for="text") Text
-        textarea(id="text" name="text" minLength="10" maxLength="500" required
+        textarea(id="text" name="text" minLength="10" maxLength="1250" required
           rows="7" cols="60")= msg ? msg.text : ""
 
       button(type="submit" class="btn-send") Submit

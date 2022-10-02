@@ -3,6 +3,10 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const async = require("async");
 
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const User = require("../models/user");
 const Message = require("../models/message");
 
@@ -12,6 +16,7 @@ exports.signUpGet = (req, res, next) => {
 };
 
 exports.signUpPost = [
+  upload.single("userImage"),
   body("firstName", "First name must not be empty")
     .trim()
     .isLength({ min: 3, max: 60 })
@@ -43,6 +48,11 @@ exports.signUpPost = [
       password: req.body.password,
       membership: req.body.membership,
       isAdmin: req.body.isAdmin,
+      image: {
+        name: req.file && req.file.originalname,
+        fileType: req.file && req.file.mimetype,
+        data: req.file && req.file.buffer,
+      },
     });
 
     if (!errors.isEmpty()) {
@@ -50,7 +60,6 @@ exports.signUpPost = [
       return res.render("signUp", {
         title: "Sign Up",
         user,
-        // confirmPassword: req.body.confirmPassword,
         errors: errors.array(),
       });
     }
@@ -117,6 +126,7 @@ exports.userUpdateGet = (req, res, next) => {
 };
 
 exports.userUpdatePost = [
+  upload.single("userImage"),
   body("firstName", "First name must not be empty")
     .trim()
     .isLength({ min: 3, max: 60 })
@@ -148,17 +158,19 @@ exports.userUpdatePost = [
       password: req.body.password,
       membership: req.body.membership,
       isAdmin: req.body.isAdmin ? true : false,
+      image: {
+        name: req.file && req.file.originalname,
+        fileType: req.file && req.file.mimetype,
+        data: req.file && req.file.buffer,
+      },
       _id: req.params.id,
     });
-
-    console.log("user after cerate", user);
 
     if (!errors.isEmpty()) {
       console.log(req.body.membership);
       return res.render("signUp", {
         title: "Update user",
         user,
-        // confirmPassword: req.body.confirmPassword,
         errors: errors.array(),
       });
     }

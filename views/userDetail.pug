@@ -1,5 +1,28 @@
 extends layouts/msgLayout
 
+mixin getIcons
+  - const isUserMember = () => user.membership;
+  - const isUserAdmin = () => user.isAdmin;
+
+  if isUserMember()
+    img(class="icon" src="/icons/star.png" alt="vip star")
+  else
+    img(class="icon" src="/icons/free.png" alt="free badge")
+  if isUserAdmin()
+    img(class="icon" src="/icons/user.png" alt="admin badge")
+
+mixin getUserImg
+  - const imageData = () => user.image.data && user.image.data.toString("base64");
+  - const imageType = () => user.image.data && user.image.fileType;
+  - const imageName = () => user.image.data && user.image.name;
+
+  if user.image.data
+    img(src=`data:${imageType()};base64,${imageData()}` alt=imageName()
+      class="profileImg")
+  else
+    img(src=`/images/default_user.png` alt="user avatar" class="profileImg")
+
+
 block main
   - const isUserProfile = () => currentUser && currentUser._id.toString() === user._id.toString();
   - const isMember = () => currentUser && currentUser.membership;
@@ -7,20 +30,16 @@ block main
   - const isUserMember = () => user.membership;
   - const isUserAdmin = () => user.isAdmin;
 
-  h1= user.fullName
   div(class="person-detail")
     div(class="person-info")
       if isMember() || isAdmin() || isUserProfile()
+        +getUserImg
+        h1= user.fullName
         p @#{user.username}
-        if isUserMember()
-          img(class="icon" src="/icons/star.png" alt="vip star")
-        else
-          img(class="icon" src="/icons/free.png" alt="free badge")
-        if isUserAdmin()
-          img(class="icon" src="/icons/user.png" alt="admin badge")
+        +getIcons
       else
-        h1 Unknown name
-        p @unknown
+        h1 Private name
+        p @private
 
     if isUserProfile() || isAdmin()
       div(class="buttons")
@@ -28,3 +47,5 @@ block main
           a(href=`${user.url}/update` class="btn-delete") Update
         p
           a(href=`${user.url}/delete` class="btn-delete") Delete
+
+  

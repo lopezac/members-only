@@ -2,7 +2,7 @@ extends layouts/layout
 
 block content
   h1= title
-  form(action="" method="POST" class="fill-form")
+  form(action="" method="POST" class="fill-form" enctype="multipart/form-data")
     div(class="form-row")
       label(for="firstName") First name
       input(type="text" id="firstName" name="firstName" minlength="3" maxlength="60"
@@ -27,9 +27,13 @@ block content
       input(type="password" id="confirmPassword" name="confirmPassword" minlength="7"
         required)
 
+    div(class="form-row-file")
+      label(for="userImage") Profile image
+      input(type="file" id="userImage" name="userImage")
+
     div(class="form-row-checkbox")
       label(for="isAdmin") Admin
-      input(type="checkbox" id="isAdmin" name="isAdmin" checked=user && user.isAdmin ? "true" : "false")
+      input(type="checkbox" id="isAdmin" name="isAdmin" checked=user.isAdmin ? true : false)
 
     button(type="submit" class="btn-send") Submit
   

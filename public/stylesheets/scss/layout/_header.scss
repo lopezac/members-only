@@ -3,9 +3,13 @@
 
 .topHeader {
   background-color: $pink;
-  padding: 15px 10px;
   font-size: 1.1rem;
   border-bottom: 1px solid $white;
+
+  nav {
+    padding: 0px 10px;
+    height: 63px;
+  }
 
   a {
     &:hover,

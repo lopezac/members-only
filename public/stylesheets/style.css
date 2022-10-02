@@ -1,4 +1,4 @@
-.msg-detail, ul, .person-detail, .person-info, form .form-row-checkbox, .buttons, .topHeader nav,
+.msg-detail, ul, .person-detail, .person-info, form .form-row-checkbox, form .form-row-file, .buttons, .topHeader nav,
 .topHeader nav ul, body > footer p, .users-list, .messages, form.fill-form, form .form-row, body {
   display: flex;
   gap: 10px;
@@ -12,7 +12,7 @@ body > footer p {
   justify-content: center;
 }
 
-.person-detail, .person-info, form .form-row-checkbox, .buttons, .topHeader nav,
+.person-detail, .person-info, form .form-row-checkbox, form .form-row-file, .buttons, .topHeader nav,
 .topHeader nav ul, body > footer p {
   align-items: center;
 }
@@ -31,9 +31,12 @@ body > footer p {
 }
 .topHeader {
   background-color: #973e4a;
-  padding: 15px 10px;
   font-size: 1.1rem;
   border-bottom: 1px solid #fafafa;
+}
+.topHeader nav {
+  padding: 0px 10px;
+  height: 63px;
 }
 .topHeader a {
   padding: 5px;
@@ -110,6 +113,11 @@ button.btn-delete:focus {
   background-color: #77323c;
 }
 
+a.btn-sign,
+button.btn-sign {
+  margin-right: 5px;
+}
+
 a.btn-send,
 button.btn-send {
   font-size: 1.3rem;
@@ -123,6 +131,18 @@ button.btn-send {
 .icon-small {
   width: 32px;
   height: 32px;
+}
+
+.profileImg {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.profileImgSmall {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
 }
 
 body {
@@ -167,18 +187,21 @@ p {
 form.fill-form {
   gap: 20px;
 }
-
-form .form-row {
-  gap: 2px;
-}
-form .form-row label {
+form.fill-form div label {
   color: #d4d4d8;
   font-size: 0.9rem;
 }
-form .form-row input,
-form .form-row textarea {
+form.fill-form div input,
+form.fill-form div textarea {
   padding: 6px;
   color: #18181b;
+}
+form.fill-form div input[type=file] {
+  color: #fafafa;
+}
+
+form .form-row {
+  gap: 2px;
 }
 
 form .form-row-checkbox input {
@@ -220,6 +243,11 @@ form .form-row-checkbox input {
 
 .person-detail {
   justify-content: space-between;
+}
+
+.person-info h1,
+.person-info p {
+  margin: 0;
 }
 
 .detail h1 {

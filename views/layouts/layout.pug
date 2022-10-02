@@ -1,9 +1,22 @@
+mixin getUserProfileImg
+  if currentUser && currentUser.image.data
+    - const imageData = () => currentUser.image.data && currentUser.image.data.toString("base64");
+    - const imageType = () => currentUser.image.data && currentUser.image.fileType;
+    - const imageName = () => currentUser.image.data && currentUser.image.name;
+    a(href=currentUser.url)
+      img(src=`data:${imageType()};base64,${imageData()}` alt=imageName()
+        class="profileImgSmall")
+  else
+    a(href=currentUser.url)
+      img(src=`/images/default_user.png` alt="user avatar" class="profileImgSmall")
+
 doctype html
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/modern-normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='icon', href='/icons/star.png', type='image/x-icon')
   body
     header(class="topHeader")
       nav
@@ -18,7 +31,8 @@ html
             li
               form(action="/sign-out" method="POST")
                 button(type="submit" class="btn-sign") Sign Out
-            li #[a(href=currentUser.url)= currentUser.username]
+            +getUserProfileImg
+
           else
             li #[a(href="/sign-up" class="btn-sign") Sign Up]
             li #[a(href="/sign-in" class="btn-sign") Sign In]

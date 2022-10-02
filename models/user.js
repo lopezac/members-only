@@ -8,6 +8,11 @@ const UserSchema = new Schema({
   password: { type: String, required: true, minLength: 7 },
   membership: { type: Boolean, required: true, default: false },
   isAdmin: { type: Boolean, required: true, default: false },
+  image: {
+    data: Buffer,
+    fileType: String,
+    name: String,
+  },
 });
 
 UserSchema.virtual("fullName").get(function () {

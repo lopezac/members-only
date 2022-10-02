@@ -13,7 +13,7 @@ exports.messageCreatePost = [
     .escape(),
   body("text", "Text must not be empty")
     .trim()
-    .isLength({ min: 10, max: 500 })
+    .isLength({ min: 10, max: 1250 })
     .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
@@ -32,7 +32,7 @@ exports.messageCreatePost = [
     });
 
     if (!errors.isEmpty()) {
-      res.render("messageForm", {
+      res.render("msgFormCreate", {
         title: "Write message",
         errors: errors.array(),
         msg: message,
@@ -89,7 +89,7 @@ exports.messageUpdatePost = [
     const errors = validationResult(req);
 
     if (!req.user) {
-      return res.render("messageForm", {
+      return res.render("msgFormUpdate", {
         title: "Update message",
         errors: [
           {
@@ -99,24 +99,27 @@ exports.messageUpdatePost = [
       });
     }
 
-    const message = new Message({
-      title: req.body.title,
-      text: req.body.text,
-      user: req.user._id,
-      _id: req.params.id,
-    });
-
-    if (!errors.isEmpty()) {
-      res.render("msgFormUpdate", {
-        title: "Write message",
-        errors: errors.array(),
-        msg: message,
-      });
-    }
-
-    Message.findByIdAndUpdate(req.params.id, message, {}, (err) => {
+    Message.findById(req.params.id).exec((err, originalMsg) => {
       if (err) return next(err);
-      res.redirect(message.url);
+      const message = new Message({
+        title: req.body.title,
+        text: req.body.text,
+        user: originalMsg.user,
+        _id: req.params.id,
+      });
+
+      if (!errors.isEmpty()) {
+        res.render("msgFormUpdate", {
+          title: "Write message",
+          errors: errors.array(),
+          msg: message,
+        });
+      }
+
+      Message.findByIdAndUpdate(req.params.id, message, {}, (err) => {
+        if (err) return next(err);
+        res.redirect(message.url);
+      });
     });
   },
 ];
@@ -131,10 +134,14 @@ exports.messageDeletePost = (req, res, next) => {
           title: message.title,
         });
       }
-      if (req.user && message.user._id.toString() === req.user._id.toString()) {
+      if (
+        (req.user && message.user._id.toString() === req.user._id.toString()) ||
+        req.user.isAdmin
+      ) {
+        const msgUserUrl = message.user.url;
         Message.findByIdAndDelete(req.params.id, {}, (err) => {
           if (err) return next(err);
-          res.redirect("/");
+          res.redirect(msgUserUrl);
         });
       }
     });

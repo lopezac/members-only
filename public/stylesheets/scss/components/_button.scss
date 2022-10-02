@@ -30,6 +30,7 @@
 a.btn-sign,
 button.btn-sign {
   @extend %button;
+  margin-right: 5px;
 }
 
 a.btn-delete,

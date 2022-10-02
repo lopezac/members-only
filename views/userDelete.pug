@@ -7,14 +7,16 @@ block content
     
   else if messages.length
     p If you wanna delete your account, you need first to delete these messages
-    ul
+    div(class="users-list")
       each message in messages
-        li
-          a(href=message.url) #{message.timestampShort} - #{message.title}
+        ul(class="msg-detail")
+          li= message.timestampShort
+          li
+            a(href=message.url)= message.title
   else
     p Are you sure you wanna delete your account?. There is no comeback.
     form(action="" method="POST")
-      button(type="submit") Delete
+      button(type="submit" class="btn-delete") Delete
 
   if errors
     ul
